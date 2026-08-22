@@ -30,6 +30,7 @@ import { CommunityView } from './views/CommunityView';
 import ScheduleView from './views/ScheduleView';
 import PastorArea from './views/PastorArea';
 import { HymnsView } from './views/HymnsView';
+import { BibleView } from './views/BibleView';
 
 // COMPONENTES & MODAIS
 import { HeaderNav } from './components/HeaderNav';
@@ -1094,10 +1095,27 @@ export const App: React.FC = () => {
           />
         )}
 
-        {(currentView === 'community' || currentView === 'prayer' || currentView === 'bible') && (
+        {currentView === 'bible' && (
+          <BibleView
+            onBack={() => setCurrentView('home')}
+            onShareToMural={(verseText, reference) => {
+              const newVerse: BibleVerse = {
+                id: `v_${Date.now()}`,
+                memberName: user?.name || 'Membro da Igreja',
+                verse: verseText,
+                reference: reference,
+                timestamp: Date.now()
+              };
+              setVerses(prev => [newVerse, ...prev]);
+            }}
+          />
+        )}
+
+        {(currentView === 'community' || currentView === 'prayer') && (
           <CommunityView
             verses={verses}
             setVerses={setVerses}
+            initialTab={currentView === 'prayer' ? 'mural' : 'chat'}
             onBack={() => setCurrentView('home')}
           />
         )}

@@ -21,6 +21,7 @@ interface CommunityProps {
   verses: BibleVerse[]; 
   setVerses: React.Dispatch<React.SetStateAction<BibleVerse[]>>; 
   onBack: () => void; 
+  initialTab?: 'chat' | 'mural';
 }
 
 const DEFAULT_CHAT_MESSAGES: ChatMessage[] = [
@@ -53,8 +54,8 @@ const DEFAULT_CHAT_MESSAGES: ChatMessage[] = [
   }
 ];
 
-export const CommunityView: React.FC<CommunityProps> = ({ verses, setVerses, onBack }) => {
-  const [activeTab, setActiveTab] = useState<'chat' | 'mural'>('chat');
+export const CommunityView: React.FC<CommunityProps> = ({ verses, setVerses, onBack, initialTab = 'chat' }) => {
+  const [activeTab, setActiveTab] = useState<'chat' | 'mural'>(initialTab);
 
   // Filtro de Departamento Ativo no Chat ('all' para ver tudo, ou o ID do departamento)
   const [selectedDepartmentFilter, setSelectedDepartmentFilter] = useState<string>('all');

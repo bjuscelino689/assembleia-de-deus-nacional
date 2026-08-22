@@ -6,7 +6,7 @@
     "email": "bjuscelino33@gmail.com",
     "isBlocked": false,
     "isOnline": true,
-    "lastActiveAt": 1787366061822,
+    "lastActiveAt": 1787367370428,
     "name": "Pr. Juscelino (Pastor Presidente)",
     "phone": "(11) 99876-5432",
     "role": "PASTOR"
@@ -50,7 +50,7 @@
   {
     "id": "usr_pastor_master",
     "isOnline": true,
-    "lastActiveAt": 1787366061822,
+    "lastActiveAt": 1787367370428,
     "name": "Pr. Juscelino (Pastor Presidente)"
   }
 ]
