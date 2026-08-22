@@ -1,0 +1,75 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Assembleia de Deus Nacional - Ministério de Madureira</title>
+    <meta name="description" content="Aplicativo Oficial da Assembleia de Deus Nacional - Ministério de Madureira. Cultos ao vivo, Bíblia Sagrada, Harpa Cristã, Vídeos, Notícias, Pedidos de Oração e Mural da Comunidade.">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <meta name="theme-color" content="#1E3A8A">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Montserrat:wght@700;900&display=swap" rel="stylesheet">
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              'app-purple': '#7C3AED',
+              'app-bg': '#F8FAFC',
+              'app-green': '#10B981',
+              'app-yellow': '#F59E0B',
+              'app-blue': '#3B82F6',
+              'app-red': '#EF4444',
+            },
+            fontFamily: {
+              sans: ['Inter', 'sans-serif'],
+              title: ['Montserrat', 'sans-serif'],
+            }
+          }
+        }
+      }
+    </script>
+    <style>
+      body {
+        -webkit-tap-highlight-color: transparent;
+        background-color: #F5F3FF;
+      }
+      .safe-bottom { padding-bottom: env(safe-area-inset-bottom); }
+      @keyframes slideUp {
+        from { transform: translateY(20px); opacity: 0; }
+        to { transform: translateY(0); opacity: 1; }
+      }
+      @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+      }
+      @keyframes scaleUp {
+        from { transform: scale(0.94); opacity: 0; }
+        to { transform: scale(1); opacity: 1; }
+      }
+      .animate-slide-up { animation: slideUp 0.3s ease-out forwards; }
+      .animate-fade-in { animation: fadeIn 0.2s ease-out forwards; }
+      .animate-scale-up { animation: scaleUp 0.25s ease-out forwards; }
+      
+      input[type="file"]::file-selector-button {
+        display: none;
+      }
+
+      ::-webkit-scrollbar {
+        width: 0px;
+      }
+    </style>
+</head>
+<body class="text-slate-900 font-sans">
+    <div id="root"></div>
+    <script type="module" src="/index.tsx"></script>
+</body>
+</html>

@@ -1,0 +1,56 @@
+[
+  {
+    "id": "m_pastor_master",
+    "accessStatus": "LIBERADO",
+    "createdAt": "2024-01-01",
+    "email": "bjuscelino33@gmail.com",
+    "isBlocked": false,
+    "isOnline": true,
+    "lastActiveAt": 1787366061822,
+    "name": "Pr. Juscelino (Pastor Presidente)",
+    "phone": "(11) 99876-5432",
+    "role": "PASTOR"
+  },
+  {
+    "id": "m_2",
+    "accessStatus": "LIBERADO",
+    "blockedReason": "Acesso suspenso pelo sistema administrativo",
+    "createdAt": "2024-01-02",
+    "email": "maria.silva@igreja.com",
+    "isBlocked": false,
+    "name": "Irmã Maria Silva",
+    "phone": "(11) 98765-4321",
+    "role": "MEMBRO"
+  },
+  {
+    "id": "usr_nurse_1785721153632",
+    "accessStatus": "LIBERADO",
+    "blockedReason": "Acesso suspenso pelo sistema administrativo",
+    "createdAt": "2026-08-03",
+    "email": "macia41@gmail.com",
+    "isBlocked": false,
+    "isOnline": false,
+    "name": "Márcia Rodrigues ",
+    "phone": "98 991534725",
+    "role": "Enfermagem Geral"
+  },
+  {
+    "id": "usr_nurse_1786055215028",
+    "accessStatus": "LIBERADO",
+    "blockedReason": "",
+    "createdAt": "2026-08-06",
+    "email": "paulo81@gmail.com",
+    "isBlocked": false,
+    "isOnline": false,
+    "lastActiveAt": 1787347275427,
+    "name": "Paulo Henrique",
+    "phone": "(98) 99256-3421",
+    "role": "Geral"
+  },
+  {
+    "id": "usr_pastor_master",
+    "isOnline": true,
+    "lastActiveAt": 1787366061822,
+    "name": "Pr. Juscelino (Pastor Presidente)"
+  }
+]
