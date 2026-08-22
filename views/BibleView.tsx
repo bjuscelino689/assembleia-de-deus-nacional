@@ -1,8 +1,8 @@
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useEffect, useMemo, useRef } from 'react';
 import { 
   BookOpen, ChevronLeft, ChevronRight, Search, Share2, Copy, 
   Volume2, VolumeX, Sparkles, Bookmark, Heart, Sun, Moon, 
-  Type, Check, ArrowLeft, Send
+  Type, Check, ArrowLeft, Send, User, Users
 } from 'lucide-react';
 import { BibleVerse } from '../types';
 
@@ -270,7 +270,26 @@ export const BibleView: React.FC<BibleViewProps> = ({ onBack, onShareToMural }) 
     ];
   }, [selectedBook, selectedChapter]);
 
-  // Síntese de Voz (Leitura da Bíblia)
+  const [voiceGender, setVoiceGender] = useState<'female' | 'male'>('female');
+  const [speechSpeed, setSpeechSpeed] = useState<number>(0.95);
+  const [availableVoices, setAvailableVoices] = useState<SpeechSynthesisVoice[]>([]);
+
+  // Carrega as vozes disponíveis no navegador
+  useEffect(() => {
+    const loadVoices = () => {
+      if ('speechSynthesis' in window) {
+        const voices = window.speechSynthesis.getVoices();
+        setAvailableVoices(voices);
+      }
+    };
+
+    loadVoices();
+    if ('speechSynthesis' in window) {
+      window.speechSynthesis.onvoiceschanged = loadVoices;
+    }
+  }, []);
+
+  // Síntese de Voz (Leitura da Bíblia com opção Masculina / Feminina)
   const handleToggleSpeech = (textToRead: string) => {
     if (!('speechSynthesis' in window)) {
       alert('Seu navegador não suporta leitura em áudio.');
@@ -286,8 +305,58 @@ export const BibleView: React.FC<BibleViewProps> = ({ onBack, onShareToMural }) 
     window.speechSynthesis.cancel();
     const utterance = new SpeechSynthesisUtterance(textToRead);
     utterance.lang = 'pt-BR';
-    utterance.rate = 0.95;
-    utterance.pitch = 1.0;
+    utterance.rate = speechSpeed;
+
+    // Encontra voz adequada para Português
+    const ptVoices = availableVoices.filter(v => v.lang.includes('pt') || v.lang.includes('PT'));
+
+    if (voiceGender === 'male') {
+      // Procura voz masculina por nome conhecido ou ajusta o tom (pitch)
+      const maleVoice = ptVoices.find(v => 
+        v.name.toLowerCase().includes('ricardo') ||
+        v.name.toLowerCase().includes('jorge') ||
+        v.name.toLowerCase().includes('antonio') ||
+        v.name.toLowerCase().includes('daniel') ||
+        v.name.toLowerCase().includes('male') ||
+        v.name.toLowerCase().includes('homem') ||
+        v.name.toLowerCase().includes('brasilian male')
+      );
+
+      if (maleVoice) {
+        utterance.voice = maleVoice;
+        utterance.pitch = 0.85; // Tom mais encorpado/grave masculino
+      } else if (ptVoices.length > 0) {
+        utterance.voice = ptVoices[0];
+        utterance.pitch = 0.75; // Tom masculino
+      } else {
+        utterance.pitch = 0.75;
+      }
+    } else {
+      // Procura voz feminina por nome conhecido ou ajusta o tom (pitch)
+      const femaleVoice = ptVoices.find(v => 
+        v.name.toLowerCase().includes('luciana') ||
+        v.name.toLowerCase().includes('maria') ||
+        v.name.toLowerCase().includes('francisca') ||
+        v.name.toLowerCase().includes('heloisa') ||
+        v.name.toLowerCase().includes('female') ||
+        v.name.toLowerCase().includes('mulher') ||
+        v.name.toLowerCase().includes('google português') ||
+        v.name.toLowerCase().includes('brasilian female')
+      );
+
+      if (femaleVoice) {
+        utterance.voice = femaleVoice;
+        utterance.pitch = 1.1; // Tom feminino natural
+      } else if (ptVoices.length > 1) {
+        utterance.voice = ptVoices[1];
+        utterance.pitch = 1.1;
+      } else if (ptVoices.length > 0) {
+        utterance.voice = ptVoices[0];
+        utterance.pitch = 1.15;
+      } else {
+        utterance.pitch = 1.15;
+      }
+    }
     
     utterance.onend = () => setIsSpeaking(false);
     utterance.onerror = () => setIsSpeaking(false);
@@ -572,15 +641,57 @@ export const BibleView: React.FC<BibleViewProps> = ({ onBack, onShareToMural }) 
             </h2>
           </div>
 
-          <div className="flex items-center gap-2">
+          <div className="flex flex-wrap items-center gap-2">
+            {/* SELETOR DE VOZ (MASCULINA / FEMININA) */}
+            <div className="flex bg-current/10 p-1 rounded-xl items-center text-xs font-bold">
+              <button
+                type="button"
+                onClick={() => {
+                  setVoiceGender('female');
+                  if (isSpeaking) {
+                    window.speechSynthesis.cancel();
+                    setIsSpeaking(false);
+                  }
+                }}
+                className={`px-2.5 py-1 rounded-lg transition-all flex items-center gap-1 cursor-pointer ${
+                  voiceGender === 'female' 
+                    ? 'bg-purple-600 text-white shadow' 
+                    : 'opacity-70 hover:opacity-100'
+                }`}
+                title="Voz Feminina"
+              >
+                <User size={13} /> Feminina
+              </button>
+              <button
+                type="button"
+                onClick={() => {
+                  setVoiceGender('male');
+                  if (isSpeaking) {
+                    window.speechSynthesis.cancel();
+                    setIsSpeaking(false);
+                  }
+                }}
+                className={`px-2.5 py-1 rounded-lg transition-all flex items-center gap-1 cursor-pointer ${
+                  voiceGender === 'male' 
+                    ? 'bg-blue-600 text-white shadow' 
+                    : 'opacity-70 hover:opacity-100'
+                }`}
+                title="Voz Masculina"
+              >
+                <User size={13} /> Masculina
+              </button>
+            </div>
+
+            {/* BOTÃO OUVIR CAPÍTULO */}
             <button
               onClick={() => {
                 const fullChapterText = currentVerses.map(v => `${v.num}. ${v.text}`).join(' ');
                 handleToggleSpeech(`${selectedBook.name} capítulo ${selectedChapter}. ${fullChapterText}`);
               }}
-              className="px-3.5 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-xs font-black shadow flex items-center gap-1.5 cursor-pointer"
+              className="px-3.5 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-xs font-black shadow flex items-center gap-1.5 cursor-pointer active:scale-95 transition-all"
             >
-              <Volume2 size={16} /> {isSpeaking ? 'Pausar Áudio' : 'Ouvir Capítulo'}
+              {isSpeaking ? <VolumeX size={16} /> : <Volume2 size={16} />} 
+              {isSpeaking ? 'Pausar Áudio' : `Ouvir (${voiceGender === 'male' ? 'Voz Masc.' : 'Voz Fem.'})`}
             </button>
           </div>
         </div>

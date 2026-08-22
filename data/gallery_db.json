@@ -1,26 +1,26 @@
 [
   {
     "id": "gal_1787249666619_kjgg",
-    "timestamp": 1787249666619,
-    "title": "Culto de jovens",
-    "type": "image",
+    "author": "Irmão nene",
     "url": "/uploads/1787263524880_2z2p1.jpg",
-    "author": "Irmão nene"
+    "type": "image",
+    "title": "Culto de jovens",
+    "timestamp": 1787249666619
   },
   {
     "id": "gal_1787249697586_afgr",
-    "timestamp": 1787249697586,
-    "author": "Linda do vovô",
-    "url": "/uploads/1787263524883_fqsn1.jpg",
+    "title": "Linda",
     "type": "image",
-    "title": "Linda"
+    "timestamp": 1787249697586,
+    "url": "/uploads/1787263524883_fqsn1.jpg",
+    "author": "Linda do vovô"
   },
   {
     "id": "gal_1787346563157_kd8i",
-    "author": "Milionária Fátima",
-    "type": "image",
+    "timestamp": 1787346563157,
     "title": "Linda foto",
     "url": "/uploads/1787352736549_d3znu.jpg",
-    "timestamp": 1787346563157
+    "type": "image",
+    "author": "Milionária Fátima"
   }
 ]

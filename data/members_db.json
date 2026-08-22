@@ -6,7 +6,7 @@
     "email": "bjuscelino33@gmail.com",
     "isBlocked": false,
     "isOnline": true,
-    "lastActiveAt": 1787367370428,
+    "lastActiveAt": 1787367692409,
     "name": "Pr. Juscelino (Pastor Presidente)",
     "phone": "(11) 99876-5432",
     "role": "PASTOR"
@@ -21,6 +21,12 @@
     "name": "Irmã Maria Silva",
     "phone": "(11) 98765-4321",
     "role": "MEMBRO"
+  },
+  {
+    "id": "pastor_master_1",
+    "lastActiveAt": 1787367242126,
+    "isOnline": true,
+    "name": "Pastor Juscelino"
   },
   {
     "id": "usr_nurse_1785721153632",
@@ -50,7 +56,7 @@
   {
     "id": "usr_pastor_master",
     "isOnline": true,
-    "lastActiveAt": 1787367370428,
+    "lastActiveAt": 1787367692409,
     "name": "Pr. Juscelino (Pastor Presidente)"
   }
 ]
